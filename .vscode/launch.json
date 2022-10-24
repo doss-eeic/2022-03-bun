@@ -104,6 +104,15 @@
       "args": ["https://example.com", "--verbose"],
       "cwd": "${workspaceFolder}",
       "console": "internalConsole"
+    },
+    {
+      "type": "lldb",
+      "request": "launch",
+      "name": "prettier console.log",
+      "program": "bun-debug",
+      "args": ["run", "examples/prettier-console-log.ts"],
+      "cwd": "${workspaceFolder}",
+      "console": "internalConsole"
     }
   ]
 }
