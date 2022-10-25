@@ -99,7 +99,7 @@ pub const Response = struct {
 
             try formatter.writeIndent(Writer, writer);
             try writer.writeAll("ok: ");
-            formatter.printAs(.Boolean, Writer, writer, JSC.JSValue.jsBoolean(this.isOK()), .BooleanObject, 0, enable_ansi_colors);
+            formatter.printAs(.Boolean, Writer, writer, JSC.JSValue.jsBoolean(this.isOK()), .BooleanObject,  enable_ansi_colors);
             formatter.printComma(Writer, writer, enable_ansi_colors) catch unreachable;
             try writer.writeAll("\n");
 
@@ -118,7 +118,7 @@ pub const Response = struct {
 
             try formatter.writeIndent(Writer, writer);
             try writer.writeAll("redirected: ");
-            formatter.printAs(.Boolean, Writer, writer, JSC.JSValue.jsBoolean(this.redirected), .BooleanObject, 0, enable_ansi_colors);
+            formatter.printAs(.Boolean, Writer, writer, JSC.JSValue.jsBoolean(this.redirected), .BooleanObject, enable_ansi_colors);
             formatter.printComma(Writer, writer, enable_ansi_colors) catch unreachable;
             try writer.writeAll("\n");
             try this.body.writeFormat(formatter, writer, enable_ansi_colors);
@@ -4321,7 +4321,7 @@ pub const Body = struct {
 
         try formatter.writeIndent(Writer, writer);
         try writer.writeAll("bodyUsed: ");
-        formatter.printAs(.Boolean, Writer, writer, JSC.JSValue.jsBoolean(this.value == .Used), .BooleanObject, 0, enable_ansi_colors);
+        formatter.printAs(.Boolean, Writer, writer, JSC.JSValue.jsBoolean(this.value == .Used), .BooleanObject, enable_ansi_colors);
         formatter.printComma(Writer, writer, enable_ansi_colors) catch unreachable;
         try writer.writeAll("\n");
 
@@ -4334,7 +4334,7 @@ pub const Body = struct {
 
         try formatter.writeIndent(Writer, writer);
         try writer.writeAll("status: ");
-        formatter.printAs(.Double, Writer, writer, JSC.JSValue.jsNumber(this.init.status_code), .NumberObject, 0, enable_ansi_colors);
+        formatter.printAs(.Double, Writer, writer, JSC.JSValue.jsNumber(this.init.status_code), .NumberObject, enable_ansi_colors);
         if (this.value == .Blob) {
             try formatter.printComma(Writer, writer, enable_ansi_colors);
             try writer.writeAll("\n");
@@ -4348,7 +4348,7 @@ pub const Body = struct {
             if (this.value.Locked.readable) |stream| {
                 try formatter.printComma(Writer, writer, enable_ansi_colors);
                 try writer.writeAll("\n");
-                formatter.printAs(.Object, Writer, writer, stream.value, stream.value.jsType(), 0, enable_ansi_colors);
+                formatter.printAs(.Object, Writer, writer, stream.value, stream.value.jsType(), enable_ansi_colors);
             }
         }
     }
@@ -5231,7 +5231,7 @@ pub const Request = struct {
                 if (this.body.Locked.readable) |stream| {
                     try writer.writeAll("\n");
                     try formatter.writeIndent(Writer, writer);
-                    formatter.printAs(.Object, Writer, writer, stream.value, stream.value.jsType(), 0, enable_ansi_colors);
+                    formatter.printAs(.Object, Writer, writer, stream.value, stream.value.jsType(), enable_ansi_colors);
                 }
             }
         }
